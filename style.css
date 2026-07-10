@@ -1,0 +1,855 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    background:
+        radial-gradient(circle at top, #111317 0%, #050505 45%, #020202 100%);
+
+    color: white;
+    overflow-x: hidden;
+    padding: 40px 20px;
+    position: relative;
+}
+
+::selection{
+    background:#ffffff;
+    color:#000;
+}
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:#090909;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#333;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#555;
+}
+
+/* ESTRELLAS */
+
+.stars{
+    position:absolute;
+    inset:0;
+
+    pointer-events:none;
+
+    background-image:
+        radial-gradient(circle,rgba(255,255,255,.15) 1px,transparent 1px),
+        radial-gradient(circle,rgba(255,255,255,.08) 1px,transparent 1px);
+
+    background-size:250px 250px,340px 340px;
+    background-position:0 0,60px 80px;
+
+    z-index:0;
+}
+
+/* CONTENEDOR */
+
+.card-wrapper{
+
+    width:100%;
+    max-width:440px;
+
+    margin:auto;
+
+    position:relative;
+
+    z-index:1;
+
+}
+
+/* TARJETA */
+
+.card{
+
+    width:100%;
+
+    padding:22px 12px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    animation:fadeIn .8s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+/* PERFIL */
+
+.profile-header{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    margin-bottom:14px;
+
+}
+
+.avatar-container{
+
+    position:relative;
+
+    width:132px;
+    height:132px;
+
+}
+
+.avatar{
+
+    width:100%;
+    height:100%;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:2px solid rgba(255,255,255,.7);
+
+    box-shadow:
+        0 0 30px rgba(255,255,255,.20),
+        0 0 60px rgba(255,255,255,.05);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+
+}
+
+.avatar:hover{
+
+    transform:scale(1.03);
+
+    box-shadow:
+        0 0 40px rgba(255,255,255,.28),
+        0 0 70px rgba(255,255,255,.08);
+
+}
+
+.status-dot{
+
+    position:absolute;
+
+    bottom:6px;
+    right:6px;
+
+    width:18px;
+    height:18px;
+
+    border-radius:50%;
+
+    border:3px solid #020202;
+
+    background:#747f8d;
+
+    transition:.25s ease;
+
+}
+
+.status-dot.online{background:#23a55a;}
+.status-dot.dnd{background:#f23f43;}
+.status-dot.idle{background:#f0b232;}
+.status-dot.offline{background:#747f8d;}
+
+h1{
+
+    margin-top:18px;
+
+    font-size:32px;
+    font-weight:700;
+
+    letter-spacing:-.5px;
+
+}
+
+.discord-tag{
+
+    margin-top:5px;
+
+    color:#9b9b9b;
+
+    font-size:15px;
+
+    font-weight:500;
+
+}
+
+.status{
+
+    margin-top:15px;
+
+    display:inline-flex;
+    align-items:center;
+
+    padding:7px 16px;
+
+    border-radius:20px;
+
+    font-size:13px;
+    font-weight:600;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.3s ease;
+
+}.status.online{
+    color:#23a55a;
+    background:rgba(35,165,90,.10);
+    border-color:rgba(35,165,90,.20);
+}
+
+.status.dnd{
+    color:#f23f43;
+    background:rgba(242,63,67,.10);
+    border-color:rgba(242,63,67,.20);
+}
+
+.status.idle{
+    color:#f0b232;
+    background:rgba(240,178,50,.10);
+    border-color:rgba(240,178,50,.20);
+}
+
+/* TARJETAS */
+
+.activity-card,
+.spotify-card{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:16px;
+
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.06);
+
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+
+}
+
+.activity-card:hover,
+.spotify-card:hover{
+
+    transform:translateY(-2px);
+
+    background:rgba(255,255,255,.045);
+
+    border-color:rgba(255,255,255,.10);
+
+}
+
+.activity-card{
+
+    border-left:4px solid #23a55a;
+
+}
+
+.spotify-card{
+
+    border-left:4px solid #1DB954;
+
+}
+
+.activity-card img{
+
+    width:46px;
+    height:46px;
+
+    border-radius:10px;
+
+    object-fit:cover;
+
+}
+
+.spotify-card img{
+
+    width:65px;
+    height:65px;
+
+    border-radius:12px;
+
+    object-fit:cover;
+
+}
+
+.activity-info,
+.spotify-info{
+
+    width:100%;
+
+}
+
+.activity-info h3,
+.spotify-info h3{
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+.activity-info p,
+.spotify-info p{
+
+    margin-top:4px;
+
+    color:#9a9a9a;
+
+    font-size:12px;
+
+}
+
+.progress-bar{
+
+    width:100%;
+    max-width:200px;
+
+    height:4px;
+
+    margin-top:10px;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.10);
+
+}
+
+.progress-fill{
+
+    height:100%;
+
+    width:0;
+
+    background:#fff;
+
+    transition:width 1s linear;
+
+}
+
+.spotify-time{
+
+    width:100%;
+    max-width:200px;
+
+    margin-top:6px;
+
+    display:flex;
+    justify-content:space-between;
+
+    color:#777;
+
+    font-size:11px;
+
+}
+
+/* REDES */
+
+.socials{
+
+    width:100%;
+
+    margin-top:28px;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.socials a{
+
+    height:66px;
+
+    padding:0 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    border-radius:15px;
+
+    text-decoration:none;
+
+    background:rgba(255,255,255,.025);
+
+    border:1px solid rgba(255,255,255,.06);
+
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+
+}
+
+.socials a:hover{
+
+    transform:translateY(-2px);
+
+    background:rgba(255,255,255,.05);
+
+    border-color:rgba(255,255,255,.12);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.35);
+
+}
+
+.btn-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+.socials img{
+
+    width:26px;
+    height:26px;
+
+    object-fit:contain;
+
+}
+
+.btn-text{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.platform-title{
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+.platform-user{
+
+    margin-top:2px;
+
+    color:#7a7a7a;
+
+    font-size:12px;
+
+}
+
+.arrow{
+
+    color:#555;
+
+    font-size:18px;
+
+    transition:
+        color .25s ease,
+        transform .25s ease;
+
+}
+
+.socials a:hover .arrow{
+
+    color:#fff;
+
+    transform:translateX(4px);
+
+}.status.online{
+    color:#23a55a;
+    background:rgba(35,165,90,.10);
+    border-color:rgba(35,165,90,.20);
+}
+
+.status.dnd{
+    color:#f23f43;
+    background:rgba(242,63,67,.10);
+    border-color:rgba(242,63,67,.20);
+}
+
+.status.idle{
+    color:#f0b232;
+    background:rgba(240,178,50,.10);
+    border-color:rgba(240,178,50,.20);
+}
+
+/* TARJETAS */
+
+.activity-card,
+.spotify-card{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:16px;
+
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.06);
+
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+
+}
+
+.activity-card:hover,
+.spotify-card:hover{
+
+    transform:translateY(-2px);
+
+    background:rgba(255,255,255,.045);
+
+    border-color:rgba(255,255,255,.10);
+
+}
+
+.activity-card{
+
+    border-left:4px solid #23a55a;
+
+}
+
+.spotify-card{
+
+    border-left:4px solid #1DB954;
+
+}
+
+.activity-card img{
+
+    width:46px;
+    height:46px;
+
+    border-radius:10px;
+
+    object-fit:cover;
+
+}
+
+.spotify-card img{
+
+    width:65px;
+    height:65px;
+
+    border-radius:12px;
+
+    object-fit:cover;
+
+}
+
+.activity-info,
+.spotify-info{
+
+    width:100%;
+
+}
+
+.activity-info h3,
+.spotify-info h3{
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+.activity-info p,
+.spotify-info p{
+
+    margin-top:4px;
+
+    color:#9a9a9a;
+
+    font-size:12px;
+
+}
+
+.progress-bar{
+
+    width:100%;
+    max-width:200px;
+
+    height:4px;
+
+    margin-top:10px;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.10);
+
+}
+
+.progress-fill{
+
+    height:100%;
+
+    width:0;
+
+    background:#fff;
+
+    transition:width 1s linear;
+
+}
+
+.spotify-time{
+
+    width:100%;
+    max-width:200px;
+
+    margin-top:6px;
+
+    display:flex;
+    justify-content:space-between;
+
+    color:#777;
+
+    font-size:11px;
+
+}
+
+/* REDES */
+
+.socials{
+
+    width:100%;
+
+    margin-top:28px;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.socials a{
+
+    height:66px;
+
+    padding:0 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    border-radius:15px;
+
+    text-decoration:none;
+
+    background:rgba(255,255,255,.025);
+
+    border:1px solid rgba(255,255,255,.06);
+
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+
+}
+
+.socials a:hover{
+
+    transform:translateY(-2px);
+
+    background:rgba(255,255,255,.05);
+
+    border-color:rgba(255,255,255,.12);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.35);
+
+}
+
+.btn-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+.socials img{
+
+    width:26px;
+    height:26px;
+
+    object-fit:contain;
+
+}
+
+.btn-text{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.platform-title{
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+.platform-user{
+
+    margin-top:2px;
+
+    color:#7a7a7a;
+
+    font-size:12px;
+
+}
+
+.arrow{
+
+    color:#555;
+
+    font-size:18px;
+
+    transition:
+        color .25s ease,
+        transform .25s ease;
+
+}
+
+.socials a:hover .arrow{
+
+    color:#fff;
+
+    transform:translateX(4px);
+
+}footer{
+
+    width:100%;
+
+    margin-top:80px;
+
+    display:flex;
+    justify-content:center;
+
+    opacity:.45;
+
+    transition:opacity .25s ease;
+
+}
+
+footer:hover{
+
+    opacity:.8;
+
+}
+
+.copyright{
+
+    font-size:10px;
+
+    color:#4b4b4b;
+
+    letter-spacing:.4px;
+
+}.socials img[alt="spotify"] {
+    width: 22px;
+    height: 22px;
+}
+
+.socials img[alt="playlist"] {
+    width: 22px;
+    height: 22px;
+}

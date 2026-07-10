@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>!Leo</title>
+
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+
+    <div class="stars"></div>
+
+    <div class="card-wrapper">
+
+        <div class="card">
+
+            <div class="profile-header">
+
+                <div class="avatar-container">
+                    <img class="avatar" id="avatar" src="" alt="Avatar">
+                    <span class="status-dot" id="status-dot"></span>
+                </div>
+
+                <h1 id="username">Cargando...</h1>
+
+                <p class="discord-tag" id="discord-tag">@Cargando...</p>
+
+                <p class="status" id="status">Conectando...</p>
+
+            </div>
+
+            <div class="activity-card" id="game-card" style="display:none;">
+
+                <img id="game-icon" src="" alt="Juego">
+
+                <div class="activity-info">
+
+                    <h3 id="game-name">Juego</h3>
+
+                    <p id="game-details">Jugando ahora</p>
+
+                </div>
+
+            </div>
+
+            <div class="spotify-card" id="spotify-card" style="display:none;">
+
+                <img id="spotify-cover" src="" alt="Spotify">
+
+                <div class="spotify-info">
+
+                    <h3 id="spotify-song">Canción</h3>
+
+                    <p id="spotify-artist">Artista</p>
+
+                    <div class="spotify-progress">
+
+                        <div class="progress-bar">
+
+                            <div class="progress-fill" id="spotify-progress"></div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="spotify-time">
+
+                        <span id="spotify-current">0:00</span>
+
+                        <span id="spotify-total">0:00</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="socials">
+
+                <a href="https://www.tiktok.com/@leomvpp" target="_blank">
+                    <div class="btn-left">
+                        <img src="assets/icons/tiktok.png" alt="TikTok">
+                        <div class="btn-text">
+                            <span class="platform-title">TikTok</span>
+                            <span class="platform-user">@leomvpp</span>
+                        </div>
+                    </div>
+                    <span class="arrow">&rarr;</span>
+                </a>
+
+                <a href="https://www.instagram.com/leog_255/" target="_blank">
+                    <div class="btn-left">
+                        <img src="assets/icons/instagram.png" alt="Instagram">
+                        <div class="btn-text">
+                            <span class="platform-title">Instagram</span>
+                            <span class="platform-user">@leog_255</span>
+                        </div>
+                    </div>
+                    <span class="arrow">&rarr;</span>
+                </a>
+
+                <a href="https://www.youtube.com/@Leomvvp" target="_blank">
+                    <div class="btn-left">
+                        <img src="assets/icons/youtube.png" alt="YouTube">
+                        <div class="btn-text">
+                            <span class="platform-title">YouTube</span>
+                            <span class="platform-user">@Leomvvp</span>
+                        </div>
+                    </div>
+                    <span class="arrow">&rarr;</span>
+                </a>
+
+                <a href="https://x.com/Leomvvp" target="_blank">
+                    <div class="btn-left">
+                        <img src="assets/icons/x.png" alt="X">
+                        <div class="btn-text">
+                            <span class="platform-title">X</span>
+                            <span class="platform-user">@Leomvvp</span>
+                        </div>
+                    </div>
+                    <span class="arrow">&rarr;</span>
+                </a>                <a href="https://steamcommunity.com/profiles/76561199560123022/" target="_blank">
+                    <div class="btn-left">
+                        <img src="assets/icons/steam.png" alt="Steam">
+                        <div class="btn-text">
+                            <span class="platform-title">Steam</span>
+                            <span class="platform-user">Ver perfil</span>
+                        </div>
+                    </div>
+                    <span class="arrow">&rarr;</span>
+                </a>
+
+                <a href="https://www.xbox.com/es-MX/play/user/LeoMC4732" target="_blank">
+                    <div class="btn-left">
+                        <img src="assets/icons/xbox.png" alt="Xbox">
+                        <div class="btn-text">
+                            <span class="platform-title">Xbox</span>
+                            <span class="platform-user">LeoMC4732</span>
+                        </div>
+                    </div>
+                    <span class="arrow">&rarr;</span>
+                </a>
+
+                <a href="https://open.spotify.com/user/31nm2tjqkkyf37qfbjytqrue3ily?si=af16abdcd63b4ac7" target="_blank">
+                    <div class="btn-left">
+                        <img src="assets/icons/spotify.png" alt="Spotify">
+                        <div class="btn-text">
+                            <span class="platform-title">Spotify</span>
+                            <span class="platform-user">Mi perfil</span>
+                        </div>
+                    </div>
+                    <span class="arrow">&rarr;</span>
+                </a>
+
+                <a href="https://open.spotify.com/playlist/78SFp0Pa1AKKgszRPBFPQx?si=9e0981b1158745dc" target="_blank">
+                    <div class="btn-left">
+                        <img src="assets/icons/playlist.png" alt="Playlist">
+                        <div class="btn-text">
+                            <span class="platform-title">Playlist</span>
+                            <span class="platform-user">Favoritas</span>
+                        </div>
+                    </div>
+                    <span class="arrow">&rarr;</span>
+                </a>
+
+            </div>
+                        <footer>
+                <p class="copyright">
+                    &copy; <span id="current-year"></span> Leo. Todos los derechos reservados.
+                </p>
+            </footer>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
