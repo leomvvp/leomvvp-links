@@ -19,6 +19,7 @@ const spotifyCurrent = document.getElementById("spotify-current");
 const spotifyTotal = document.getElementById("spotify-total");
 const spotifyProgress = document.getElementById("spotify-progress");
 
+
 const currentYear = document.getElementById("current-year");
 
 if (currentYear) {
@@ -30,20 +31,20 @@ let spotifyStart = null;
 let spotifyEnd = null;
 
 
-
 function formatTime(ms) {
 
     const seconds = Math.floor(ms / 1000);
+
     const minutes = Math.floor(seconds / 60);
+
     const remainingSeconds = seconds % 60;
+
 
     return `${minutes}:${remainingSeconds
         .toString()
         .padStart(2, "0")}`;
 
 }
-
-
 
 
 
@@ -82,8 +83,10 @@ async function getDiscordData() {
             user.discord_user.username;
 
 
+
         discordTag.textContent =
             `@${user.discord_user.username}`;
+
 
 
         avatar.src =
@@ -96,17 +99,25 @@ async function getDiscordData() {
         // ESTADO
 
 
+        const currentStatus =
+            user.discord_status;
+
+
+
         status.className = "status";
         statusDot.className = "status-dot";
 
 
-        switch (user.discord_status) {
+
+        switch (currentStatus) {
 
 
             case "online":
 
                 status.textContent = "En línea";
+
                 status.classList.add("online");
+
                 statusDot.classList.add("online");
 
                 break;
@@ -116,7 +127,9 @@ async function getDiscordData() {
             case "idle":
 
                 status.textContent = "Ausente";
+
                 status.classList.add("idle");
+
                 statusDot.classList.add("idle");
 
                 break;
@@ -126,7 +139,9 @@ async function getDiscordData() {
             case "dnd":
 
                 status.textContent = "No molestar";
+
                 status.classList.add("dnd");
+
                 statusDot.classList.add("dnd");
 
                 break;
@@ -136,11 +151,12 @@ async function getDiscordData() {
             default:
 
                 status.textContent = "Desconectado";
+
                 status.classList.add("offline");
+
                 statusDot.classList.add("offline");
 
         }
-
 
 
 
@@ -188,7 +204,9 @@ async function getDiscordData() {
 
             spotifyCard.style.display = "none";
 
+
             spotifyStart = null;
+
             spotifyEnd = null;
 
 
@@ -200,64 +218,72 @@ async function getDiscordData() {
 
 
 
-     // ACTIVIDAD / JUEGO
+        // JUEGO / ACTIVIDAD
 
-const game =
-    user.activities.find(
-        activity => activity.type === 0
-    );
 
-if (game) {
+        const game =
+            user.activities.find(
+                activity => activity.type === 0
+            );
 
-    gameCard.style.display = "flex";
 
-    gameName.textContent =
-        game.name;
 
-    gameDetails.textContent =
-        game.details ||
-        "Jugando ahora";
+        if (game) {
 
-    gameIcon.style.display = "block";
 
-    if (game.assets?.large_image) {
+            gameCard.style.display = "flex";
 
-        if (game.assets.large_image.startsWith("mp:")) {
 
-            gameIcon.src =
-                `https://media.discordapp.net/${game.assets.large_image.replace("mp:", "")}`;
+            gameName.textContent =
+                game.name;
 
-        } else {
 
-            gameIcon.src =
-                `https://cdn.discordapp.com/app-assets/${game.application_id}/${game.assets.large_image}.png?size=256`;
 
-        }
+            gameDetails.textContent =
+                game.details ||
+                "Jugando ahora";
 
-    } else {
 
-        // Iconos personalizados
 
-        const customIcons = {
-            "ROBLOX": "assets/icons/roblox.png",
-            "Minecraft": "assets/icons/minecraft.png",
-            "Minecraft Launcher": "assets/icons/minecraft.png",
-            "Java(TM) Platform SE Binary": "assets/icons/minecraft.png"
-        };
 
-        gameIcon.src =
-            customIcons[game.name] ||
-            "assets/icons/default-game.png";
+            if (game.assets?.large_image) {
 
-    }
 
-} else {
 
-    gameCard.style.display = "none";
+                if (
+                    game.assets.large_image.startsWith("mp:")
+                ) {
 
-}
+
+
+                    gameIcon.src =
+                    `https://media.discordapp.net/${game.assets.large_image.replace("mp:", "")}`;
+
+
+
+                } else {
+
+
+
+                    gameIcon.src =
+                    `https://cdn.discordapp.com/app-assets/${game.application_id}/${game.assets.large_image}.png`;
+
+
+
+                }
+
+
+
+
+            } else {
+
+
+                gameIcon.src =
+                    "assets/icons/game.png";
+
 
             }
+
 
 
 
@@ -299,8 +325,7 @@ if (game) {
 
 
 
-
-// ACTUALIZAR BARRA SPOTIFY
+// ACTUALIZAR SPOTIFY
 
 
 setInterval(() => {
@@ -309,8 +334,10 @@ setInterval(() => {
     if (spotifyStart && spotifyEnd) {
 
 
+
         const current =
             Date.now() - spotifyStart;
+
 
 
         const total =
@@ -318,11 +345,14 @@ setInterval(() => {
 
 
 
+
         if (current < total) {
+
 
 
             spotifyCurrent.textContent =
                 formatTime(current);
+
 
 
             spotifyTotal.textContent =
@@ -330,8 +360,10 @@ setInterval(() => {
 
 
 
+
             spotifyProgress.style.width =
                 `${(current / total) * 100}%`;
+
 
 
         }
@@ -340,8 +372,8 @@ setInterval(() => {
     }
 
 
-}, 1000);
 
+}, 1000);
 
 
 
@@ -356,7 +388,7 @@ getDiscordData();
 
 
 
-// ACTUALIZAR CADA 3 SEGUNDOS
+// ACTUALIZAR DISCORD CADA 3 SEGUNDOS
 
 
 setInterval(
