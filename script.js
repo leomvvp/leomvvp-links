@@ -25,8 +25,10 @@ if (currentYear) {
     currentYear.textContent = new Date().getFullYear();
 }
 
+
 let spotifyStart = null;
 let spotifyEnd = null;
+
 
 
 function formatTime(ms) {
@@ -38,7 +40,10 @@ function formatTime(ms) {
     return `${minutes}:${remainingSeconds
         .toString()
         .padStart(2, "0")}`;
+
 }
+
+
 
 
 
@@ -54,6 +59,7 @@ async function getDiscordData() {
         const data = await response.json();
 
 
+
         if (!data.success) {
 
             username.textContent = "Discord no disponible";
@@ -62,6 +68,7 @@ async function getDiscordData() {
             return;
 
         }
+
 
 
         const user = data.data;
@@ -85,18 +92,15 @@ async function getDiscordData() {
 
 
 
+
         // ESTADO
-
-
-        const currentStatus =
-            user.discord_status;
 
 
         status.className = "status";
         statusDot.className = "status-dot";
 
 
-        switch (currentStatus) {
+        switch (user.discord_status) {
 
 
             case "online":
@@ -135,7 +139,14 @@ async function getDiscordData() {
                 status.classList.add("offline");
                 statusDot.classList.add("offline");
 
-        }        // SPOTIFY
+        }
+
+
+
+
+
+
+        // SPOTIFY
 
 
         if (user.listening_to_spotify) {
@@ -177,9 +188,7 @@ async function getDiscordData() {
 
             spotifyCard.style.display = "none";
 
-
             spotifyStart = null;
-
             spotifyEnd = null;
 
 
@@ -191,14 +200,19 @@ async function getDiscordData() {
 
 
 
-        // JUEGO / ACTIVIDAD
+        // ACTIVIDAD / JUEGO
 
 
         const game =
             user.activities.find(
                 activity => activity.type === 0
             );
-console.log("ACTIVIDAD:", game);
+
+
+        console.log("ACTIVIDAD:", game);
+        console.log("TODAS LAS ACTIVIDADES:", user.activities);
+
+
 
 
         if (game) {
@@ -211,11 +225,13 @@ console.log("ACTIVIDAD:", game);
                 game.name;
 
 
-
             gameDetails.textContent =
                 game.details ||
                 "Jugando ahora";
 
+
+
+            gameIcon.style.display = "block";
 
 
 
@@ -223,10 +239,7 @@ console.log("ACTIVIDAD:", game);
 
 
 
-                if (
-                    game.assets.large_image.startsWith("mp:")
-                ) {
-
+                if (game.assets.large_image.startsWith("mp:")) {
 
 
                     gameIcon.src =
@@ -242,21 +255,17 @@ console.log("ACTIVIDAD:", game);
                     `https://cdn.discordapp.com/app-assets/${game.application_id}/${game.assets.large_image}.png?size=256`;
 
 
-
                 }
-
 
 
 
             } else {
 
 
-                gameIcon.src =
-                    "assets/icons/game.png";
+                gameIcon.style.display = "none";
 
 
             }
-
 
 
 
@@ -298,7 +307,8 @@ console.log("ACTIVIDAD:", game);
 
 
 
-// ACTUALIZAR SPOTIFY
+
+// ACTUALIZAR BARRA SPOTIFY
 
 
 setInterval(() => {
@@ -307,10 +317,8 @@ setInterval(() => {
     if (spotifyStart && spotifyEnd) {
 
 
-
         const current =
             Date.now() - spotifyStart;
-
 
 
         const total =
@@ -318,14 +326,11 @@ setInterval(() => {
 
 
 
-
         if (current < total) {
-
 
 
             spotifyCurrent.textContent =
                 formatTime(current);
-
 
 
             spotifyTotal.textContent =
@@ -333,10 +338,8 @@ setInterval(() => {
 
 
 
-
             spotifyProgress.style.width =
                 `${(current / total) * 100}%`;
-
 
 
         }
@@ -345,8 +348,8 @@ setInterval(() => {
     }
 
 
-
 }, 1000);
+
 
 
 
@@ -361,7 +364,7 @@ getDiscordData();
 
 
 
-// ACTUALIZAR DISCORD CADA 3 SEGUNDOS
+// ACTUALIZAR CADA 3 SEGUNDOS
 
 
 setInterval(
