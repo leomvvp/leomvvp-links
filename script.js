@@ -220,78 +220,58 @@ async function getDiscordData() {
 
         // JUEGO / ACTIVIDAD
 
+const game =
+    user.activities.find(
+        activity => activity.type === 0
+    );
 
-        const game =
-            user.activities.find(
-                activity => activity.type === 0
-            );
+if (game) {
 
+    gameCard.style.display = "flex";
 
+    gameName.textContent =
+        game.name;
 
-        if (game) {
-
-
-            gameCard.style.display = "flex";
-
-
-            gameName.textContent =
-                game.name;
-
-
-
-            gameDetails.textContent =
-                game.details ||
-                "Jugando ahora";
-
-
-
-
-           if (game.assets?.large_image) {
+    gameDetails.textContent =
+        game.details ||
+        "Jugando ahora";
 
     gameIcon.style.display = "block";
 
-    if (game.assets.large_image.startsWith("mp:")) {
+    if (game.assets?.large_image) {
 
-        gameIcon.src =
-            `https://media.discordapp.net/${game.assets.large_image.replace("mp:", "")}`;
+        if (game.assets.large_image.startsWith("mp:")) {
+
+            gameIcon.src =
+                `https://media.discordapp.net/${game.assets.large_image.replace("mp:", "")}`;
+
+        } else {
+
+            gameIcon.src =
+                `https://cdn.discordapp.com/app-assets/${game.application_id}/${game.assets.large_image}.png?size=256`;
+
+        }
 
     } else {
 
+        const customIcons = {
+            "ROBLOX": "assets/icons/roblox.png",
+            "Minecraft": "assets/icons/minecraft.png",
+            "Minecraft Launcher": "assets/icons/minecraft.png",
+            "Java(TM) Platform SE Binary": "assets/icons/minecraft.png"
+        };
+
         gameIcon.src =
-            `https://cdn.discordapp.com/app-assets/${game.application_id}/${game.assets.large_image}.png?size=256`;
+            customIcons[game.name] ||
+            "assets/icons/default-game.png";
 
     }
 
 } else {
 
-    gameIcon.style.display = "block";
-
-    const customIcons = {
-        "ROBLOX": "assets/icons/roblox.png",
-        "Minecraft": "assets/icons/minecraft.png",
-        "Minecraft Launcher": "assets/icons/minecraft.png",
-        "Java(TM) Platform SE Binary": "assets/icons/minecraft.png"
-    };
-
-    gameIcon.src =
-        customIcons[game.name] ||
-        "assets/icons/default-game.png";
+    gameCard.style.display = "none";
 
 }
-
-
-            }
-
-
-
-
-        } else {
-
-
-            gameCard.style.display = "none";
-
-
-        }
 
 
 
