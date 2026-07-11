@@ -19,8 +19,11 @@ const spotifyCurrent = document.getElementById("spotify-current");
 const spotifyTotal = document.getElementById("spotify-total");
 const spotifyProgress = document.getElementById("spotify-progress");
 
-document.getElementById("current-year").textContent =
-    new Date().getFullYear();
+const currentYear = document.getElementById("current-year");
+
+if (currentYear) {
+    currentYear.textContent = new Date().getFullYear();
+}
 
 let spotifyStart = null;
 let spotifyEnd = null;
