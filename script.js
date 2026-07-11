@@ -246,40 +246,38 @@ async function getDiscordData() {
 
 
 
-            if (game.assets?.large_image) {
+           if (game.assets?.large_image) {
 
+    gameIcon.style.display = "block";
 
+    if (game.assets.large_image.startsWith("mp:")) {
 
-                if (
-                    game.assets.large_image.startsWith("mp:")
-                ) {
+        gameIcon.src =
+            `https://media.discordapp.net/${game.assets.large_image.replace("mp:", "")}`;
 
+    } else {
 
+        gameIcon.src =
+            `https://cdn.discordapp.com/app-assets/${game.application_id}/${game.assets.large_image}.png?size=256`;
 
-                    gameIcon.src =
-                    `https://media.discordapp.net/${game.assets.large_image.replace("mp:", "")}`;
+    }
 
+} else {
 
+    gameIcon.style.display = "block";
 
-                } else {
+    const customIcons = {
+        "ROBLOX": "assets/icons/roblox.png",
+        "Minecraft": "assets/icons/minecraft.png",
+        "Minecraft Launcher": "assets/icons/minecraft.png",
+        "Java(TM) Platform SE Binary": "assets/icons/minecraft.png"
+    };
 
+    gameIcon.src =
+        customIcons[game.name] ||
+        "assets/icons/default-game.png";
 
-
-                    gameIcon.src =
-                    `https://cdn.discordapp.com/app-assets/${game.application_id}/${game.assets.large_image}.png`;
-
-
-
-                }
-
-
-
-
-            } else {
-
-
-                gameIcon.src =
-                    "assets/icons/game.png";
+}
 
 
             }
