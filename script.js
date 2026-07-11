@@ -209,7 +209,7 @@ async function getDiscordData() {
             );
 
 
-        console.log("ACTIVIDAD:", game);
+        console.log(JSON.stringify(game, null, 2));
         console.log("TODAS LAS ACTIVIDADES:", user.activities);
 
 
