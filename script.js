@@ -19,13 +19,11 @@ const spotifyCurrent = document.getElementById("spotify-current");
 const spotifyTotal = document.getElementById("spotify-total");
 const spotifyProgress = document.getElementById("spotify-progress");
 
-
 const currentYear = document.getElementById("current-year");
 
 if (currentYear) {
     currentYear.textContent = new Date().getFullYear();
 }
-
 
 let spotifyStart = null;
 let spotifyEnd = null;
@@ -34,16 +32,12 @@ let spotifyEnd = null;
 function formatTime(ms) {
 
     const seconds = Math.floor(ms / 1000);
-
     const minutes = Math.floor(seconds / 60);
-
     const remainingSeconds = seconds % 60;
-
 
     return `${minutes}:${remainingSeconds
         .toString()
         .padStart(2, "0")}`;
-
 }
 
 
@@ -60,7 +54,6 @@ async function getDiscordData() {
         const data = await response.json();
 
 
-
         if (!data.success) {
 
             username.textContent = "Discord no disponible";
@@ -69,7 +62,6 @@ async function getDiscordData() {
             return;
 
         }
-
 
 
         const user = data.data;
@@ -83,15 +75,12 @@ async function getDiscordData() {
             user.discord_user.username;
 
 
-
         discordTag.textContent =
             `@${user.discord_user.username}`;
 
 
-
         avatar.src =
             `https://cdn.discordapp.com/avatars/${user.discord_user.id}/${user.discord_user.avatar}.webp?size=256`;
-
 
 
 
@@ -103,10 +92,8 @@ async function getDiscordData() {
             user.discord_status;
 
 
-
         status.className = "status";
         statusDot.className = "status-dot";
-
 
 
         switch (currentStatus) {
@@ -115,9 +102,7 @@ async function getDiscordData() {
             case "online":
 
                 status.textContent = "En línea";
-
                 status.classList.add("online");
-
                 statusDot.classList.add("online");
 
                 break;
@@ -127,9 +112,7 @@ async function getDiscordData() {
             case "idle":
 
                 status.textContent = "Ausente";
-
                 status.classList.add("idle");
-
                 statusDot.classList.add("idle");
 
                 break;
@@ -139,9 +122,7 @@ async function getDiscordData() {
             case "dnd":
 
                 status.textContent = "No molestar";
-
                 status.classList.add("dnd");
-
                 statusDot.classList.add("dnd");
 
                 break;
@@ -151,18 +132,10 @@ async function getDiscordData() {
             default:
 
                 status.textContent = "Desconectado";
-
                 status.classList.add("offline");
-
                 statusDot.classList.add("offline");
 
-        }
-
-
-
-
-
-        // SPOTIFY
+        }        // SPOTIFY
 
 
         if (user.listening_to_spotify) {
@@ -266,7 +239,7 @@ async function getDiscordData() {
 
 
                     gameIcon.src =
-                    `https://cdn.discordapp.com/app-assets/${game.application_id}/${game.assets.large_image}.png`;
+                    `https://cdn.discordapp.com/app-assets/${game.application_id}/${game.assets.large_image}.png?size=256`;
 
 
 
