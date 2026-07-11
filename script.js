@@ -200,70 +200,62 @@ async function getDiscordData() {
 
 
 
-        // ACTIVIDAD / JUEGO
+     // ACTIVIDAD / JUEGO
 
+const game =
+    user.activities.find(
+        activity => activity.type === 0
+    );
 
-        const game =
-            user.activities.find(
-                activity => activity.type === 0
-            );
+if (game) {
 
+    gameCard.style.display = "flex";
 
-        console.log(JSON.stringify(game, null, 2));
-        console.log("TODAS LAS ACTIVIDADES:", user.activities);
+    gameName.textContent =
+        game.name;
 
+    gameDetails.textContent =
+        game.details ||
+        "Jugando ahora";
 
+    gameIcon.style.display = "block";
 
+    if (game.assets?.large_image) {
 
-        if (game) {
+        if (game.assets.large_image.startsWith("mp:")) {
 
+            gameIcon.src =
+                `https://media.discordapp.net/${game.assets.large_image.replace("mp:", "")}`;
 
-            gameCard.style.display = "flex";
+        } else {
 
+            gameIcon.src =
+                `https://cdn.discordapp.com/app-assets/${game.application_id}/${game.assets.large_image}.png?size=256`;
 
-            gameName.textContent =
-                game.name;
+        }
 
+    } else {
 
-            gameDetails.textContent =
-                game.details ||
-                "Jugando ahora";
+        // Iconos personalizados
 
+        const customIcons = {
+            "ROBLOX": "assets/icons/roblox.png",
+            "Minecraft": "assets/icons/minecraft.png",
+            "Minecraft Launcher": "assets/icons/minecraft.png",
+            "Java(TM) Platform SE Binary": "assets/icons/minecraft.png"
+        };
 
+        gameIcon.src =
+            customIcons[game.name] ||
+            "assets/icons/default-game.png";
 
-            gameIcon.style.display = "block";
+    }
 
+} else {
 
+    gameCard.style.display = "none";
 
-            if (game.assets?.large_image) {
-
-
-
-                if (game.assets.large_image.startsWith("mp:")) {
-
-
-                    gameIcon.src =
-                    `https://media.discordapp.net/${game.assets.large_image.replace("mp:", "")}`;
-
-
-
-                } else {
-
-
-
-                    gameIcon.src =
-                    `https://cdn.discordapp.com/app-assets/${game.application_id}/${game.assets.large_image}.png?size=256`;
-
-
-                }
-
-
-
-            } else {
-
-
-                gameIcon.style.display = "none";
-
+}
 
             }
 
