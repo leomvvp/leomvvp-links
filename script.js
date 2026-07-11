@@ -198,7 +198,7 @@ async function getDiscordData() {
             user.activities.find(
                 activity => activity.type === 0
             );
-
+console.log("ACTIVIDAD:", game);
 
 
         if (game) {
