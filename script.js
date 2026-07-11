@@ -393,5 +393,5 @@ getDiscordData();
 
 setInterval(
     getDiscordData,
-    15000
+    3000
 );
